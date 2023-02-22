@@ -1,7 +1,7 @@
 import socket
 import queue
 import threading
-from . import config
+from .. import config
 
 messages = queue.Queue()
 clients = []
