@@ -1,11 +1,13 @@
 import socket
 import random
 import threading
-from . import config
+from functions import readJson
 
+config = readJson()
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-client.bind((config.HOST, random.randint(8000, 9000)))
+client.bind((config[0], random.randint(8000, 9000)))
 nickname = input("Nickname: ")
+
 
 def recievePackage() -> None:
     while True:
@@ -18,11 +20,11 @@ def recievePackage() -> None:
 thr = threading.Thread(target=recievePackage)
 thr.start()
 
-client.sendto(f"SIGNUP_TAG:{nickname}".encode(), (config.HOST, config.PORT))
+client.sendto(f"SIGNUP_TAG:{nickname}".encode(), (config))
 
 while True:
     msg = input("")
     if msg == "!q":
         exit()
     else:
-        client.sendto(f"{nickname}: {msg}".encode(), (config.HOST, config.PORT))
+        client.sendto(f"{nickname}: {msg}".encode(), (config))

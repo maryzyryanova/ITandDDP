@@ -1,13 +1,14 @@
 import socket
 import queue
 import threading
-from .. import config
+from functions import readJson
 
+config = readJson()
 messages = queue.Queue()
 clients = []
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server.bind((config.HOST, config.PORT))
+server.bind(config)
 
 def recievePackage() -> None:
     while True:
@@ -28,9 +29,9 @@ def broadcastFunction() -> None:
                 try:
                     if msg.decode().startswith("SIGNUP_TAG:"):
                         nickname = msg.decode()[msg.decode().index(":")+1:]
-                        server.sendto(f"{nickname} joined the chat!", client)
+                        server.sendto(f"{nickname} joined the chat!".encode(), client)
                     else:
-                        server.sendto(msg)
+                        server.sendto(msg, client)
                 except:
                     clients.remove(client)
 
