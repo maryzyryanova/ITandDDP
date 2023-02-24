@@ -1,0 +1,54 @@
+{
+    "chat_id": 1,
+    "users": [
+        "mary",
+        "vova"
+    ],
+    "messages": [
+        {
+            "id": 0,
+            "sender": "mary",
+            "text": "mary online!"
+        },
+        {
+            "id": 1,
+            "sender": "vova",
+            "text": "vova online!"
+        },
+        {
+            "id": 2,
+            "sender": "vova",
+            "text": "vova online!"
+        },
+        {
+            "id": 3,
+            "sender": "mary",
+            "text": "mary: fsdg"
+        },
+        {
+            "id": 4,
+            "sender": "mary",
+            "text": "mary: fsdg"
+        },
+        {
+            "id": 5,
+            "sender": "vova",
+            "text": "vova: vsdb"
+        },
+        {
+            "id": 6,
+            "sender": "vova",
+            "text": "vova: vsdb"
+        },
+        {
+            "id": 7,
+            "sender": "mary",
+            "text": "mary: q!"
+        },
+        {
+            "id": 8,
+            "sender": "mary",
+            "text": "mary: q!"
+        }
+    ]
+}
