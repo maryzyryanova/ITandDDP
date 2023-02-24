@@ -6,7 +6,6 @@ from functions import readJson
 
 config = readJson()
 messages = queue.Queue()
-id = 0
 clients = []
 users = []
 mess = []
@@ -22,6 +21,7 @@ def recievePackage() -> None:
             pass
 
 def broadcastFunction() -> None:
+    id = 0
     while True:
         while not messages.empty():
             msg, adr = messages.get()
@@ -32,14 +32,18 @@ def broadcastFunction() -> None:
                 try:
                     if msg.decode().startswith("SIGNUP_TAG:"):
                         nickname = msg.decode()[msg.decode().index(":")+1:]
+                        users.append(nickname)
                         server.sendto(f"{nickname} online!".encode(), client)
-                        users.append(client)
                     else:
                         server.sendto(msg, client)
-                        mess.append({"id" : id, "sender" : client, "text" : msg})
-                        id += 1
                 except:
                     clients.remove(client)
+            if msg.decode().startswith("SIGNUP_TAG:"):
+                mess.append({"id" : id, "sender" : nickname, "text" : f"{nickname} online!"})
+            else:
+                mess.append({"id" : id, "sender" : nickname, "text" : msg.decode()})
+            id += 1
+            print(mess)
         with open('messages.json', 'w') as f:
             json.dump({"chat_id" : 1, "users" : users, "messages" : mess}, f)
 
