@@ -42,9 +42,8 @@ def broadcastFunction() -> None:
                         if len(clients) == 2:
                             if data['users'] == users:
                                 for i in range(data['messages']['id']):
-                                    for c in clients:
-                                        server.sendto(data['messages'][i]['text'], c)
-                                        mess.append({"id" : id, "sender" : nickname, "text" : message})
+                                    server.sendto(data['messages'][i]['text'], client)
+                                    # mess.append({"id" : id, "sender" : nickname, "text" : message})
                                     id += 1
                         else:
                             chat_id += 1

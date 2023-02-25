@@ -22,33 +22,23 @@
         },
         {
             "id": 3,
-            "sender": "mary",
-            "text": "mary: fsdg"
+            "sender": "vova",
+            "text": "vova: hello"
         },
         {
             "id": 4,
-            "sender": "mary",
-            "text": "mary: fsdg"
+            "sender": "vova",
+            "text": "vova: hello"
         },
         {
             "id": 5,
-            "sender": "vova",
-            "text": "vova: vsdb"
+            "sender": "mary",
+            "text": "mary: hi"
         },
         {
             "id": 6,
-            "sender": "vova",
-            "text": "vova: vsdb"
-        },
-        {
-            "id": 7,
             "sender": "mary",
-            "text": "mary: q!"
-        },
-        {
-            "id": 8,
-            "sender": "mary",
-            "text": "mary: q!"
+            "text": "mary: hi"
         }
     ]
 }
