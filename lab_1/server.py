@@ -25,6 +25,7 @@ def recievePackage() -> None:
 
 def broadcastFunction() -> None:
     id = 0
+    chat_id = 0
     while True:
         while not messages.empty():
             msg, adr = messages.get()
@@ -43,7 +44,10 @@ def broadcastFunction() -> None:
                                 for i in range(data['messages']['id']):
                                     for c in clients:
                                         server.sendto(data['messages'][i]['text'], c)
+                                        mess.append({"id" : id, "sender" : nickname, "text" : message})
                                     id += 1
+                        else:
+                            chat_id += 1
                     else:
                         server.sendto(msg, client)
                 except:
@@ -57,8 +61,9 @@ def broadcastFunction() -> None:
                 id += 1
                 print(mess)
                 print(users)
+            
             with open('messages.json', 'w+') as f:
-                json.dump({"chat_id" : 1, "users" : list(users), "messages" : mess}, f)
+                json.dump({"chat_id" : chat_id, "users" : list(users), "messages" : mess}, f)
 
 thread_1 = threading.Thread(target=recievePackage)
 thread_2 = threading.Thread(target=broadcastFunction)
