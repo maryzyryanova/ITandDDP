@@ -13,6 +13,9 @@ mess = []
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.bind(config)
 
+with open('messages.json', 'r') as f:
+    data = json.load(f)
+
 def recievePackage() -> None:
     while True:
         try:
@@ -22,7 +25,6 @@ def recievePackage() -> None:
 
 def broadcastFunction() -> None:
     id = 0
-    
     while True:
         while not messages.empty():
             msg, adr = messages.get()
@@ -36,6 +38,12 @@ def broadcastFunction() -> None:
                         nickname = message[message.index(":")+1:]
                         server.sendto(f"{nickname} online!".encode(), client)
                         users.add(nickname)
+                        if len(clients) == 2:
+                            if data['users'] == users:
+                                for i in range(data['messages']['id']):
+                                    for c in clients:
+                                        server.sendto(data['messages'][i]['text'], c)
+                                    id += 1
                     else:
                         server.sendto(msg, client)
                 except:
